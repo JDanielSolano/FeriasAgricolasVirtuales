@@ -36,11 +36,12 @@ namespace WiserSoft.UI.Controllers
             var loginResultClients = cli.BuscarClientePorLogin(users.Us_User_Name, passwordEncripted);
             var loginResultUsers = use.BuscarUsers(users.Us_User_Name, passwordEncripted);
             if (loginResultClients != null)
-            { //Si es nulo no existe
+            { 
+                //Si es nulo, entonces no existe.
                 Session["UserID"] = users.Us_User_Name;
-                Session["Nombre"] = loginResultClients.Cl_Nombre?? users.Us_User_Name; //Si el campo de nombre es nulo entonces se muestra el usuario
+                Session["Nombre"] = loginResultClients.Cl_Nombre?? users.Us_User_Name; //Si el campo de nombre es nulo, entonces se muestra el usuario.
                 Session["Type"] = "cliente";
-                Session["Cedula"] = loginResultClients.Cl_Cedula ?? "0"; //Si el campo es nulo pone un 0 por default
+                Session["Cedula"] = loginResultClients.Cl_Cedula ?? "0"; //Si el campo es nulo, pone un 0 por valor default.
                 return RedirectToAction("Index", "SeleccionDeFeria");
             }
             else if (loginResultUsers)
